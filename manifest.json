@@ -1,10 +1,10 @@
 {
-  "name": "My Web App",
-  "short_name": "WebApp",
-  "start_url": "index.html",
+  "name": "TV Wine",
+  "short_name": "TVWine",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#000000",
+  "theme_color": "#6a00ff",
   "orientation": "portrait",
   "icons": [
     {
