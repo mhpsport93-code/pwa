@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Install App</title>
+<meta charset="utf-8">
+<title>My Web App</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
+Loading App...
 <script>
-location.href="https://mhputech.site";
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+setTimeout(function(){
+  window.location.replace("https://tv-wine-alpha.vercel.app");
+}, 800);
 </script>
-
 </body>
 </html>
