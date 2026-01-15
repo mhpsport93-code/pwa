@@ -1,94 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>TV App</title>
+  <meta charset="UTF-8">
+  <title>TV Wine</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- REQUIRED FOR PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6a00ff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-margin:0;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-font-family:sans-serif;
-background:#000;
-color:#fff;
-}
-
-/* TOAST */
-#toast{
-position:fixed;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-background:#222;
-color:#fff;
-padding:12px 18px;
-border-radius:6px;
-display:none;
-z-index:9999;
-}
-#toast button{
-margin-left:10px;
-background:#e50914;
-color:#fff;
-border:none;
-padding:6px 10px;
-border-radius:4px;
-}
-</style>
+  <!-- OPTIONAL SEO -->
+  <meta name="description" content="TV Wine Streaming Web App">
 </head>
 
 <body>
-Loading App...
 
-<div id="toast">
-Install App?
-<button id="installBtn">Install</button>
-<button id="skipBtn">Skip</button>
-</div>
+  <!-- =========================
+       YOUR WEBSITE CONTENT
+       ========================= -->
+  <h1>Welcome to TV Wine</h1>
+  <p>Streaming App</p>
 
-<script>
-// SERVICE WORKER
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-
-const TARGET_URL = "https://tv-wine-alpha.vercel.app";
-let deferredPrompt;
-
-// INSTALL EVENT
-window.addEventListener("beforeinstallprompt", function (e) {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById("toast").style.display = "block";
-});
-
-// INSTALL CLICK
-document.getElementById("installBtn").onclick = function () {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.finally(() => {
-      window.location.href = TARGET_URL;
-    });
-  }
-};
-
-// SKIP CLICK
-document.getElementById("skipBtn").onclick = function () {
-  window.location.href = TARGET_URL;
-};
-
-// AUTO REDIRECT AFTER 5 SEC (IF NO ACTION)
-setTimeout(function(){
-  window.location.href = TARGET_URL;
-}, 5000);
-</script>
+  <!-- =========================
+       PWA SERVICE WORKER REGISTER
+       ========================= -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js")
+          .then(() => console.log("Service Worker Registered"))
+          .catch(err => console.log("SW error", err));
+      });
+    }
+  </script>
 
 </body>
 </html>
